@@ -1,0 +1,1801 @@
+{
+    "name": "Copy Data from SpaceParts SQL Database",
+    "objectId": "78589f79-e305-49e3-b596-60d995be1b3b",
+    "properties": {
+        "jobMode": "Batch",
+        "source": {
+            "type": "AzureSqlTable",
+            "connectionSettings": {
+                "type": "AzureSqlDatabase",
+                "typeProperties": {
+                    "database": "SpacePartsCoDW"
+                },
+                "externalReferences": {
+                    "connection": "52eb7461-9d15-4beb-beda-ca82b81d12c7"
+                }
+            }
+        },
+        "destination": {
+            "type": "LakehouseTable",
+            "connectionSettings": {
+                "type": "Lakehouse",
+                "typeProperties": {
+                    "workspaceId": "ff411815-c4df-4c30-af48-070311bc45b2",
+                    "artifactId": "d443477d-7386-46ba-81bc-55463a5de369",
+                    "rootFolder": "Tables"
+                }
+            }
+        },
+        "policy": {
+            "timeout": "0.12:00:00"
+        }
+    },
+    "activities": [
+        {
+            "id": "781b293a-f901-4437-bb2f-93f1cfc4b00a",
+            "properties": {
+                "source": {
+                    "datasetSettings": {
+                        "schema": "Dimview",
+                        "table": "Brands"
+                    },
+                    "partitionOption": "None"
+                },
+                "destination": {
+                    "datasetSettings": {
+                        "schema": "SpaceParts",
+                        "table": "brands"
+                    },
+                    "writeBehavior": "Append"
+                },
+                "enableStaging": false,
+                "translator": {
+                    "type": "TabularTranslator",
+                    "mappings": [
+                        {
+                            "source": {
+                                "name": "Flagship",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "50"
+                            },
+                            "destination": {
+                                "name": "flagship",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Class",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "50"
+                            },
+                            "destination": {
+                                "name": "brand_class",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Type",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "50"
+                            },
+                            "destination": {
+                                "name": "brand_type",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Brand",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "50"
+                            },
+                            "destination": {
+                                "name": "brand",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Sub Brand",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "sub_brand",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Product Brand VP",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "brand_vp",
+                                "physicalType": "string"
+                            }
+                        }
+                    ]
+                },
+                "typeConversionSettings": {
+                    "typeConversion": {
+                        "allowDataTruncation": true,
+                        "treatBooleanAsNumber": false
+                    }
+                }
+            }
+        },
+        {
+            "id": "b407695e-a6e7-4110-a538-f71740909a98",
+            "properties": {
+                "source": {
+                    "datasetSettings": {
+                        "schema": "Dimview",
+                        "table": "Budget Rate"
+                    },
+                    "partitionOption": "None"
+                },
+                "destination": {
+                    "datasetSettings": {
+                        "schema": "SpaceParts",
+                        "table": "budget_rate"
+                    },
+                    "writeBehavior": "Append"
+                },
+                "enableStaging": false,
+                "translator": {
+                    "type": "TabularTranslator",
+                    "mappings": [
+                        {
+                            "source": {
+                                "name": "Rate",
+                                "type": "Decimal",
+                                "physicalType": "decimal",
+                                "scale": 5,
+                                "precision": 10
+                            },
+                            "destination": {
+                                "name": "rate",
+                                "physicalType": "decimal",
+                                "scale": 5,
+                                "precision": 10
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "From Currency",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "10"
+                            },
+                            "destination": {
+                                "name": "from_currency",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "To Currency",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "10"
+                            },
+                            "destination": {
+                                "name": "to_currency",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Currency System",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "50"
+                            },
+                            "destination": {
+                                "name": "currency",
+                                "physicalType": "string"
+                            }
+                        }
+                    ]
+                },
+                "typeConversionSettings": {
+                    "typeConversion": {
+                        "allowDataTruncation": true,
+                        "treatBooleanAsNumber": false
+                    }
+                }
+            }
+        },
+        {
+            "id": "4a82b2d2-eacb-41af-9f47-4c34d8a3253a",
+            "properties": {
+                "source": {
+                    "datasetSettings": {
+                        "schema": "Dimview",
+                        "table": "Customers"
+                    },
+                    "partitionOption": "None"
+                },
+                "destination": {
+                    "datasetSettings": {
+                        "schema": "SpaceParts",
+                        "table": "customers"
+                    },
+                    "writeBehavior": "Append"
+                },
+                "enableStaging": false,
+                "translator": {
+                    "type": "TabularTranslator",
+                    "mappings": [
+                        {
+                            "source": {
+                                "name": "Customer Key",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "customer_key",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Customer Sold-To Name",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "soldto",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Account Name",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "account",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Key Account Name",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "key_account",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Transaction Type",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "transaction_type",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Account Type",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "account_type",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Key Account Manager",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "key_account_manager",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Account Manager",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "account_manager",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Station",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "station",
+                                "physicalType": "string"
+                            }
+                        }
+                    ]
+                },
+                "typeConversionSettings": {
+                    "typeConversion": {
+                        "allowDataTruncation": true,
+                        "treatBooleanAsNumber": false
+                    }
+                }
+            }
+        },
+        {
+            "id": "113f8d96-5381-4a5b-bd2c-2deaae4b9fe6",
+            "properties": {
+                "source": {
+                    "datasetSettings": {
+                        "schema": "Dimview",
+                        "table": "Employees"
+                    },
+                    "partitionOption": "None"
+                },
+                "destination": {
+                    "datasetSettings": {
+                        "schema": "SpaceParts",
+                        "table": "employees"
+                    },
+                    "writeBehavior": "Append"
+                },
+                "enableStaging": false,
+                "translator": {
+                    "type": "TabularTranslator",
+                    "mappings": [
+                        {
+                            "source": {
+                                "name": "Role",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "150"
+                            },
+                            "destination": {
+                                "name": "role",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Employee Name",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "150"
+                            },
+                            "destination": {
+                                "name": "name",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Employee Email",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "150"
+                            },
+                            "destination": {
+                                "name": "email",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Data Security Rule",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "150"
+                            },
+                            "destination": {
+                                "name": "security_rule",
+                                "physicalType": "string"
+                            }
+                        }
+                    ]
+                },
+                "typeConversionSettings": {
+                    "typeConversion": {
+                        "allowDataTruncation": true,
+                        "treatBooleanAsNumber": false
+                    }
+                }
+            }
+        },
+        {
+            "id": "34a7e7ed-21e2-4386-87ab-15e94537235c",
+            "properties": {
+                "source": {
+                    "datasetSettings": {
+                        "schema": "Dimview",
+                        "table": "Exchange Rate"
+                    },
+                    "partitionOption": "None"
+                },
+                "destination": {
+                    "datasetSettings": {
+                        "schema": "SpaceParts",
+                        "table": "exchange_rate"
+                    },
+                    "writeBehavior": "Append"
+                },
+                "enableStaging": false,
+                "translator": {
+                    "type": "TabularTranslator",
+                    "mappings": [
+                        {
+                            "source": {
+                                "name": "Rate Type",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "30"
+                            },
+                            "destination": {
+                                "name": "rate_type",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "From Currency",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "10"
+                            },
+                            "destination": {
+                                "name": "from_currency",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "To Currency",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "10"
+                            },
+                            "destination": {
+                                "name": "to_currency",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Currency System",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "50"
+                            },
+                            "destination": {
+                                "name": "currency_system",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Rate",
+                                "type": "Decimal",
+                                "physicalType": "decimal",
+                                "scale": 5,
+                                "precision": 10
+                            },
+                            "destination": {
+                                "name": "rate",
+                                "physicalType": "decimal",
+                                "scale": 5,
+                                "precision": 10
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Date",
+                                "type": "DateTime",
+                                "physicalType": "datetime"
+                            },
+                            "destination": {
+                                "name": "currency_date",
+                                "physicalType": "timestamp"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Month",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "20"
+                            },
+                            "destination": {
+                                "name": "month",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Exchange Rate Composite Key",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "exchange_rate_composite_key",
+                                "physicalType": "string"
+                            }
+                        }
+                    ]
+                },
+                "typeConversionSettings": {
+                    "typeConversion": {
+                        "allowDataTruncation": true,
+                        "treatBooleanAsNumber": false
+                    }
+                }
+            }
+        },
+        {
+            "id": "73a2fa64-c7e0-46e2-8361-fb164f2cce9e",
+            "properties": {
+                "source": {
+                    "datasetSettings": {
+                        "schema": "Dimview",
+                        "table": "Invoice Document Type"
+                    },
+                    "partitionOption": "None"
+                },
+                "destination": {
+                    "datasetSettings": {
+                        "schema": "SpaceParts",
+                        "table": "invoice_document_type"
+                    },
+                    "writeBehavior": "Append"
+                },
+                "enableStaging": false,
+                "translator": {
+                    "type": "TabularTranslator",
+                    "mappings": [
+                        {
+                            "source": {
+                                "name": "Billing Document Type Code",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "10"
+                            },
+                            "destination": {
+                                "name": "code",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Text",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "text",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Doc. Type Ordinal",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "destination": {
+                                "name": "ordinal",
+                                "physicalType": "integer"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Group",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "group",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Group Ordinal",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "destination": {
+                                "name": "group_ordinal",
+                                "physicalType": "integer"
+                            }
+                        }
+                    ]
+                },
+                "typeConversionSettings": {
+                    "typeConversion": {
+                        "allowDataTruncation": true,
+                        "treatBooleanAsNumber": false
+                    }
+                }
+            }
+        },
+        {
+            "id": "9059e293-6bbe-4493-8595-fe499c7cdabb",
+            "properties": {
+                "source": {
+                    "datasetSettings": {
+                        "schema": "Dimview",
+                        "table": "Order Document Type"
+                    },
+                    "partitionOption": "None"
+                },
+                "destination": {
+                    "datasetSettings": {
+                        "schema": "SpaceParts",
+                        "table": "order_document_type"
+                    },
+                    "writeBehavior": "Append"
+                },
+                "enableStaging": false,
+                "translator": {
+                    "type": "TabularTranslator",
+                    "mappings": [
+                        {
+                            "source": {
+                                "name": "Sales Order Document Type Code",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "10"
+                            },
+                            "destination": {
+                                "name": "code",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Text",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "text",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Doc. Type Ordinal",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "destination": {
+                                "name": "ordinal",
+                                "physicalType": "integer"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Group",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "group",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Group Ordinal",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "destination": {
+                                "name": "group_ordinal",
+                                "physicalType": "integer"
+                            }
+                        }
+                    ]
+                },
+                "typeConversionSettings": {
+                    "typeConversion": {
+                        "allowDataTruncation": true,
+                        "treatBooleanAsNumber": false
+                    }
+                }
+            }
+        },
+        {
+            "id": "14f4c824-c007-46ac-ba43-d9a71592a04f",
+            "properties": {
+                "source": {
+                    "datasetSettings": {
+                        "schema": "Dimview",
+                        "table": "Order Status"
+                    },
+                    "partitionOption": "None"
+                },
+                "destination": {
+                    "datasetSettings": {
+                        "schema": "SpaceParts",
+                        "table": "order_status"
+                    },
+                    "writeBehavior": "Append"
+                },
+                "enableStaging": false,
+                "translator": {
+                    "type": "TabularTranslator",
+                    "mappings": [
+                        {
+                            "source": {
+                                "name": "Order Status Code",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "50"
+                            },
+                            "destination": {
+                                "name": "code",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Order Status Text",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "text",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Order Status Ordinal",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "destination": {
+                                "name": "ordinal",
+                                "physicalType": "integer"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Order Status Group",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "50"
+                            },
+                            "destination": {
+                                "name": "group",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Order Status Grouping Ordinal",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "destination": {
+                                "name": "group_ordinal",
+                                "physicalType": "integer"
+                            }
+                        }
+                    ]
+                },
+                "typeConversionSettings": {
+                    "typeConversion": {
+                        "allowDataTruncation": true,
+                        "treatBooleanAsNumber": false
+                    }
+                }
+            }
+        },
+        {
+            "id": "7342dc30-6726-4cac-8d2f-40432ab0737d",
+            "properties": {
+                "source": {
+                    "datasetSettings": {
+                        "schema": "Dimview",
+                        "table": "Products"
+                    },
+                    "partitionOption": "None"
+                },
+                "destination": {
+                    "datasetSettings": {
+                        "schema": "SpaceParts",
+                        "table": "products"
+                    },
+                    "writeBehavior": "Append"
+                },
+                "enableStaging": false,
+                "translator": {
+                    "type": "TabularTranslator",
+                    "mappings": [
+                        {
+                            "source": {
+                                "name": "Sub Brand Name",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "150"
+                            },
+                            "destination": {
+                                "name": "sub_brand",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Ship Class for Part",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "150"
+                            },
+                            "destination": {
+                                "name": "part_ship_class",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Product Name",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "150"
+                            },
+                            "destination": {
+                                "name": "product_name",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Product Business Line Leader",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "150"
+                            },
+                            "destination": {
+                                "name": "business_line_leader",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Part Fit Grading",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "150"
+                            },
+                            "destination": {
+                                "name": "part_fit_grading",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Product Key",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "destination": {
+                                "name": "product_key",
+                                "physicalType": "integer"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Subtype",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "150"
+                            },
+                            "destination": {
+                                "name": "product_subtype",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Type",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "150"
+                            },
+                            "destination": {
+                                "name": "product_type",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Weight (Tonnes)",
+                                "type": "Decimal",
+                                "physicalType": "decimal",
+                                "scale": 5,
+                                "precision": 10
+                            },
+                            "destination": {
+                                "name": "product_weight_tonnes",
+                                "physicalType": "decimal",
+                                "scale": 5,
+                                "precision": 10
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Maximum Temperature (K)",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "destination": {
+                                "name": "part_max_temp_kelvin",
+                                "physicalType": "integer"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Velocity Tolerance (Meters / Second)",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "destination": {
+                                "name": "part_velocity_tolerance_meters",
+                                "physicalType": "integer"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Tolerance (g)",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "destination": {
+                                "name": "part_gravity_tolerance_g",
+                                "physicalType": "integer"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "MK",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "150"
+                            },
+                            "destination": {
+                                "name": "mk",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Color",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "150"
+                            },
+                            "destination": {
+                                "name": "color",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Production Series",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "150"
+                            },
+                            "destination": {
+                                "name": "part_production_series",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Nameplate",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "150"
+                            },
+                            "destination": {
+                                "name": "part_nameplate",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Material",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "150"
+                            },
+                            "destination": {
+                                "name": "part_material",
+                                "physicalType": "string"
+                            }
+                        }
+                    ]
+                },
+                "typeConversionSettings": {
+                    "typeConversion": {
+                        "allowDataTruncation": true,
+                        "treatBooleanAsNumber": false
+                    }
+                }
+            }
+        },
+        {
+            "id": "fe321d0e-f257-48da-9c29-35874f0f0499",
+            "properties": {
+                "source": {
+                    "datasetSettings": {
+                        "schema": "Dimview",
+                        "table": "Regions"
+                    },
+                    "partitionOption": "None"
+                },
+                "destination": {
+                    "datasetSettings": {
+                        "schema": "SpaceParts",
+                        "table": "regions"
+                    },
+                    "writeBehavior": "Append"
+                },
+                "enableStaging": false,
+                "translator": {
+                    "type": "TabularTranslator",
+                    "mappings": [
+                        {
+                            "source": {
+                                "name": "All",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "all",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "System",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "system",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Interplanetary Region",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "interplanetary_region",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Territory",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "territory",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Station",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "station",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Station Type",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "station_type",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Tax Rate",
+                                "type": "Decimal",
+                                "physicalType": "decimal",
+                                "scale": 5,
+                                "precision": 10
+                            },
+                            "destination": {
+                                "name": "tax_rate",
+                                "physicalType": "decimal",
+                                "scale": 5,
+                                "precision": 10
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "System Sales Directors",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "system_sales_directors",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Station Sales Managers",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "station_sales_managers",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "System Regional Managers",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "system_regional_managers",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Territory Directors",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "territory_directors",
+                                "physicalType": "string"
+                            }
+                        }
+                    ]
+                },
+                "typeConversionSettings": {
+                    "typeConversion": {
+                        "allowDataTruncation": true,
+                        "treatBooleanAsNumber": false
+                    }
+                }
+            }
+        },
+        {
+            "id": "87fa5957-ab3c-47b0-971e-b5846d6d3531",
+            "properties": {
+                "source": {
+                    "datasetSettings": {
+                        "schema": "Factview",
+                        "table": "Budget"
+                    },
+                    "partitionOption": "None"
+                },
+                "destination": {
+                    "datasetSettings": {
+                        "schema": "SpaceParts",
+                        "table": "budget"
+                    },
+                    "writeBehavior": "Append"
+                },
+                "enableStaging": false,
+                "translator": {
+                    "type": "TabularTranslator",
+                    "mappings": [
+                        {
+                            "source": {
+                                "name": "Month",
+                                "type": "DateTime",
+                                "physicalType": "date"
+                            },
+                            "destination": {
+                                "name": "budget_date",
+                                "physicalType": "timestamp"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Total Budget",
+                                "type": "Double",
+                                "physicalType": "float"
+                            },
+                            "destination": {
+                                "name": "budget_eur",
+                                "physicalType": "double"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Customer Key",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "MAX"
+                            },
+                            "destination": {
+                                "name": "customer_key",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Product Key",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "destination": {
+                                "name": "product_key",
+                                "physicalType": "integer"
+                            }
+                        }
+                    ]
+                },
+                "typeConversionSettings": {
+                    "typeConversion": {
+                        "allowDataTruncation": true,
+                        "treatBooleanAsNumber": false
+                    }
+                }
+            }
+        },
+        {
+            "id": "1cc133c3-f36e-4834-8227-9166377fccb9",
+            "properties": {
+                "source": {
+                    "datasetSettings": {
+                        "schema": "Factview",
+                        "table": "Forecast"
+                    },
+                    "partitionOption": "None"
+                },
+                "destination": {
+                    "datasetSettings": {
+                        "schema": "SpaceParts",
+                        "table": "forecast"
+                    },
+                    "writeBehavior": "Append"
+                },
+                "enableStaging": false,
+                "translator": {
+                    "type": "TabularTranslator",
+                    "mappings": [
+                        {
+                            "source": {
+                                "name": "Forecast Month",
+                                "type": "DateTime",
+                                "physicalType": "date"
+                            },
+                            "destination": {
+                                "name": "forecast_date",
+                                "physicalType": "timestamp"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Region Territory",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "150"
+                            },
+                            "destination": {
+                                "name": "region_territory",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Product Type",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "100"
+                            },
+                            "destination": {
+                                "name": "product_type",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Forecast (EUR)",
+                                "type": "Decimal",
+                                "physicalType": "decimal",
+                                "scale": 2,
+                                "precision": 12
+                            },
+                            "destination": {
+                                "name": "forecast_eur",
+                                "physicalType": "decimal",
+                                "scale": 2,
+                                "precision": 12
+                            }
+                        }
+                    ]
+                },
+                "typeConversionSettings": {
+                    "typeConversion": {
+                        "allowDataTruncation": true,
+                        "treatBooleanAsNumber": false
+                    }
+                }
+            }
+        },
+        {
+            "id": "0d3ca75e-d27c-45ba-a289-cac470b24224",
+            "properties": {
+                "source": {
+                    "datasetSettings": {
+                        "schema": "Factview",
+                        "table": "Invoices"
+                    },
+                    "partitionOption": "None"
+                },
+                "destination": {
+                    "datasetSettings": {
+                        "schema": "SpaceParts",
+                        "table": "invoices"
+                    },
+                    "writeBehavior": "Append"
+                },
+                "enableStaging": false,
+                "translator": {
+                    "type": "TabularTranslator",
+                    "mappings": [
+                        {
+                            "source": {
+                                "name": "Billing Document Number",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "destination": {
+                                "name": "billing_doc_number",
+                                "physicalType": "integer"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Billing Document Line Item Number",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "destination": {
+                                "name": "billing_doc_line_item_number",
+                                "physicalType": "integer"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Customer Key",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "MAX"
+                            },
+                            "destination": {
+                                "name": "customer_key",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Product Key",
+                                "type": "Int64",
+                                "physicalType": "bigint"
+                            },
+                            "destination": {
+                                "name": "product_key",
+                                "physicalType": "long"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Billing Date",
+                                "type": "DateTime",
+                                "physicalType": "date"
+                            },
+                            "destination": {
+                                "name": "billing_date",
+                                "physicalType": "timestamp"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Ship Date",
+                                "type": "DateTime",
+                                "physicalType": "date"
+                            },
+                            "destination": {
+                                "name": "ship_date",
+                                "physicalType": "timestamp"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "OTD Indicator",
+                                "type": "Boolean",
+                                "physicalType": "bit"
+                            },
+                            "destination": {
+                                "name": "otd",
+                                "physicalType": "boolean"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Billing Document Type Code",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "MAX"
+                            },
+                            "destination": {
+                                "name": "billing_doc_type_code",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Local Currency",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "MAX"
+                            },
+                            "destination": {
+                                "name": "local_currency",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Late Delivery Penalties",
+                                "type": "Double",
+                                "physicalType": "float"
+                            },
+                            "destination": {
+                                "name": "late_delivery_penalties",
+                                "physicalType": "double"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Overdue Payment Penalties",
+                                "type": "Double",
+                                "physicalType": "float"
+                            },
+                            "destination": {
+                                "name": "overdue_payment_Penalties",
+                                "physicalType": "double"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Taxes & Commercial Fees",
+                                "type": "Double",
+                                "physicalType": "float"
+                            },
+                            "destination": {
+                                "name": "taxes_commercial_fees",
+                                "physicalType": "double"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Freight",
+                                "type": "Double",
+                                "physicalType": "float"
+                            },
+                            "destination": {
+                                "name": "freight_surcharge",
+                                "physicalType": "double"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Delivery Cost",
+                                "type": "Double",
+                                "physicalType": "float"
+                            },
+                            "destination": {
+                                "name": "delivery_cost",
+                                "physicalType": "double"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Net Invoice Value",
+                                "type": "Double",
+                                "physicalType": "float"
+                            },
+                            "destination": {
+                                "name": "net_invoice_value",
+                                "physicalType": "double"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Net Invoice COGS",
+                                "type": "Double",
+                                "physicalType": "float"
+                            },
+                            "destination": {
+                                "name": "net_invoice_cost",
+                                "physicalType": "double"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Net Invoice Quantity",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "destination": {
+                                "name": "net_invoice_quantity",
+                                "physicalType": "integer"
+                            }
+                        }
+                    ]
+                },
+                "typeConversionSettings": {
+                    "typeConversion": {
+                        "allowDataTruncation": true,
+                        "treatBooleanAsNumber": false
+                    }
+                }
+            }
+        },
+        {
+            "id": "79b6b274-3672-4e36-8171-227d00349a5d",
+            "properties": {
+                "source": {
+                    "datasetSettings": {
+                        "schema": "Factview",
+                        "table": "Orders"
+                    },
+                    "partitionOption": "None"
+                },
+                "destination": {
+                    "datasetSettings": {
+                        "schema": "SpaceParts",
+                        "table": "orders"
+                    },
+                    "writeBehavior": "Append"
+                },
+                "enableStaging": false,
+                "translator": {
+                    "type": "TabularTranslator",
+                    "mappings": [
+                        {
+                            "source": {
+                                "name": "Sales Order Document Number",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "destination": {
+                                "name": "order_document_number",
+                                "physicalType": "integer"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Order Date",
+                                "type": "DateTime",
+                                "physicalType": "date"
+                            },
+                            "destination": {
+                                "name": "order_date",
+                                "physicalType": "timestamp"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Customer Key",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "MAX"
+                            },
+                            "destination": {
+                                "name": "customer_key",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Sales Order Document Line Item Number",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "destination": {
+                                "name": "order_document_line_number",
+                                "physicalType": "integer"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Product Key",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "destination": {
+                                "name": "product_key",
+                                "physicalType": "integer"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Billing Date",
+                                "type": "DateTime",
+                                "physicalType": "date"
+                            },
+                            "destination": {
+                                "name": "billing_date",
+                                "physicalType": "timestamp"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Ship Date",
+                                "type": "DateTime",
+                                "physicalType": "date"
+                            },
+                            "destination": {
+                                "name": "ship_date",
+                                "physicalType": "timestamp"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Request Goods Receipt Date",
+                                "type": "DateTime",
+                                "physicalType": "date"
+                            },
+                            "destination": {
+                                "name": "request_gi_date",
+                                "physicalType": "timestamp"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Confirm Goods Receipt Date",
+                                "type": "DateTime",
+                                "physicalType": "date"
+                            },
+                            "destination": {
+                                "name": "confirm_gi_date",
+                                "physicalType": "timestamp"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Sales Order Document Type Code",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "MAX"
+                            },
+                            "destination": {
+                                "name": "order_doc_type_code",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Sales Order Document Line Item Status",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "MAX"
+                            },
+                            "destination": {
+                                "name": "order_line_status_code",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Local Currency",
+                                "type": "String",
+                                "physicalType": "nvarchar",
+                                "length": "MAX"
+                            },
+                            "destination": {
+                                "name": "local_currency",
+                                "physicalType": "string"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Net Order Value",
+                                "type": "Double",
+                                "physicalType": "float"
+                            },
+                            "destination": {
+                                "name": "net_order_value",
+                                "physicalType": "double"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Net Order Quantity",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "destination": {
+                                "name": "net_order_quantity",
+                                "physicalType": "integer"
+                            }
+                        }
+                    ]
+                },
+                "typeConversionSettings": {
+                    "typeConversion": {
+                        "allowDataTruncation": true,
+                        "treatBooleanAsNumber": false
+                    }
+                }
+            }
+        }
+    ]
+}
