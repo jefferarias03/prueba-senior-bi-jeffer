@@ -53,7 +53,7 @@ Tablas grandes (fact.Invoices, fact.Orders) se filtraron por Billing Date 2020�
 3. Transformación
 
 Conversión de fechas (Billing Date) desde formato numérico (epoch * 100ns) a datetime.
-Group by en la tabla invoices por el motivo que esta teniamo muchos datos, así mismo llevarlo al nivel de la tabla Budget con el fon de comparar los mismos rangos de fechas establecidos del año 2020 al 2022
+Group by en la base invoices por el motivo que esta tiene muchos datos, así mismo llevarlo al nivel de la tabla Budget con el fin de comparar los mismos rangos de fechas establecidos del año 2020 al 2022. Lo mismo se realizó para la base de Orders
 
 Limpieza de valores numéricos (ventas, costos, penalizaciones).
 
@@ -65,7 +65,7 @@ exported_tables/ → datos crudos.
 
 5. Modelado en Power bi
 
-Algunas tablas no se les realizo el proceso de transofrmación desde el scrip de python, se realizaorn directamente en power bi. 
+Algunas tablas no se les realizo el proceso de transformación desde el scrip de python, se realizaorn directamente en power bi ya sea con columnas personalizadas.
 
 - Se construyó un modelo estrella con:
 
@@ -90,7 +90,6 @@ Top clientes y top productos por ventas.
 
 Análisis de márgenes brutos por clientes
 
-Comparativo de facturación vs pedidos(Ventas, cantidades)
-
-Tiempo promedio de facturación, entregas.
-
+Repositorio en GitHub: https://github.com/jefferarias03/prueba-senior-bi-jeffer.git
+Power BI Service (link de visualización): https://app.powerbi.com/reportEmbed?reportId=ecf6d164-1282-4501-8f6d-a8a033a0286f&autoAuth=true&ctid=29fe05fc-1e21-4a27-906f-1b7b6768c125
+Archivos CSV (datos exportados): https://tractocar-my.sharepoint.com/:f:/p/jarias/EqAlH1RXVCNDr4nzCMIrUfsBMoBQKR2ayetAxqRUL41dvQ?e=dxNnaR
