@@ -90,3 +90,7 @@ Top clientes y top productos por ventas.
 
 Análisis de márgenes brutos por clientes
 
+Comparativo de facturación vs pedidos(Ventas, cantidades)
+
+Tiempo promedio de facturación, entregas.
+
